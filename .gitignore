@@ -1,3 +1,4 @@
 /runtime/
 /vendor/
 .env
+.idea
