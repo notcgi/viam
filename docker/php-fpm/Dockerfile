@@ -2,8 +2,9 @@
 FROM php:8.0-fpm-alpine3.13 AS base
 WORKDIR "/app"
 
-#COPY --from=mlocati/php-extension-installer:1.2.28 /usr/bin/install-php-extensions /usr/local/bin/
-RUN #install-php-extensions linux-headers pdo_pgsql intl gd redis openssl xdebug
+RUN apk add --update linux-headers
+COPY --from=mlocati/php-extension-installer:1.2.28 /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions xdebug pdo_pgsql  #intl gd redis openssl
 
 COPY --from=composer:2.1.3 /usr/bin/composer /usr/bin/composer
 VOLUME composer-cache:/tmp/

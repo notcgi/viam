@@ -19,6 +19,8 @@ services:
         - 9003
       networks:
         - viam
+      depends_on:
+        - postgres
 
     postgres:
       image: postgres:13
@@ -52,6 +54,9 @@ services:
         - 80
       networks:
         - viam
+      depends_on:
+        - php
+        - postgres
 volumes:
     data_php-fpm:
     data_postgres:
